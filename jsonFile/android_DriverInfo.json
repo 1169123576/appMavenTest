@@ -1,0 +1,19 @@
+{
+"androiddevice":[
+	"huaweiMate":{	
+		"platformName":"Android",
+		"deviceName":"UYT7N18428003768",
+		"platformVersion":"8.0.0",
+		"appActivity":"com.to8to.steward.TLaunchActivity",
+		"appPacket":"com.to8to.housekeeper"
+	},
+	"xiaoMi_8":{
+		"platformName":"Android",
+		"deviceName":"7543b9ad",
+		"platformVersion":"8.1.0",
+		"appActivity":"com.to8to.steward.TLaunchActivity",
+		"appPacket":"com.to8to.housekeeper"
+	},
+],
+"iosdevice":[{},{}]
+}

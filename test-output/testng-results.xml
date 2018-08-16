@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="5" passed="5">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="34287" started-at="2018-08-14T11:25:38Z" finished-at="2018-08-14T11:26:12Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="34287" started-at="2018-08-14T11:25:38Z" finished-at="2018-08-14T11:26:12Z">
+      <class name="to8to_app.imgs.imgLibraies.TestClassAppNg">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:to8to_app.imgs.imgLibraies.TestClassAppNg@96532d6]" name="setUp" is-config="true" duration-ms="9664" started-at="2018-08-14T19:25:38Z" finished-at="2018-08-14T19:25:48Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="BtnStay()[pri:0, instance:to8to_app.imgs.imgLibraies.TestClassAppNg@96532d6]" name="BtnStay" duration-ms="8063" started-at="2018-08-14T19:25:48Z" finished-at="2018-08-14T19:25:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- BtnStay -->
+        <test-method status="PASS" signature="clickSetting()[pri:0, instance:to8to_app.imgs.imgLibraies.TestClassAppNg@96532d6]" name="clickSetting" duration-ms="5168" started-at="2018-08-14T19:25:56Z" finished-at="2018-08-14T19:26:01Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clickSetting -->
+        <test-method status="PASS" signature="indexBanner()[pri:0, instance:to8to_app.imgs.imgLibraies.TestClassAppNg@96532d6]" name="indexBanner" duration-ms="1" started-at="2018-08-14T19:26:01Z" depends-on-methods="to8to_app.imgs.imgLibraies.TestClassAppNg.clickSetting" finished-at="2018-08-14T19:26:01Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- indexBanner -->
+        <test-method status="PASS" signature="startggdate()[pri:0, instance:to8to_app.imgs.imgLibraies.TestClassAppNg@96532d6]" name="startggdate" duration-ms="3592" started-at="2018-08-14T19:26:01Z" depends-on-methods="to8to_app.imgs.imgLibraies.TestClassAppNg.BtnStay" finished-at="2018-08-14T19:26:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startggdate -->
+        <test-method status="PASS" signature="loginContact()[pri:0, instance:to8to_app.imgs.imgLibraies.TestClassAppNg@96532d6]" name="loginContact" duration-ms="6658" started-at="2018-08-14T19:26:05Z" depends-on-methods="to8to_app.imgs.imgLibraies.TestClassAppNg.startggdate" finished-at="2018-08-14T19:26:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginContact -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:to8to_app.imgs.imgLibraies.TestClassAppNg@96532d6]" name="tearDown" is-config="true" duration-ms="1125" started-at="2018-08-14T19:26:11Z" finished-at="2018-08-14T19:26:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- to8to_app.imgs.imgLibraies.TestClassAppNg -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
