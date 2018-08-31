@@ -17,10 +17,7 @@ public class TestClassApp_load {
 	String fileName=null;
 	@Test
 	public void BtnStay(){
-		AndroidDriver draver = null;
-		OverallSituation overallSituation = new OverallSituation();
 		try {
-			//androidDriver = overallSituation.setUp(draver);
 			System.out.println("--driver--" + androidDriver);
 			Thread.sleep(3000);
 			//新安装后进入首页
@@ -40,7 +37,7 @@ public class TestClassApp_load {
 			MobileElement btnStart = (MobileElement) androidDriver
 					.findElementById("com.to8to.housekeeper:id/btn_start");
 			btnStart.click();
-			Thread.sleep(4000);	
+			Thread.sleep(3000);	
 			loginContact(androidDriver);
 		} catch (Exception e) {
 			try {

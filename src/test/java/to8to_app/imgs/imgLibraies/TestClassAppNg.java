@@ -14,31 +14,34 @@ import org.testng.annotations.Test;
 
 import to8to_app.to8to_app_Factory.OverallSituation;
 
-public class TestClassAppNg  {
-	private AndroidDriver androidDriver=null;
-	private static String devicesName=null;
-	 private static String platformVersion=null;
+public class TestClassAppNg {
+	private static AndroidDriver androidDriver = null;
+	private static String devicesName = null;
+	private static String platformVersion = null;
 	OverallSituation overallSituation = new OverallSituation();
+
 	@BeforeTest
-	public AndroidDriver setUp() throws Exception{
+	public static AndroidDriver setUp() throws Exception {
 		File classpathRoot = new File(System.getProperty("user.dir"));
 		File appDir = new File(classpathRoot, "apps");
 		File app = new File(appDir, "app-to8to-release-8-13-6.3.0.7.apk");
 		DesiredCapabilities capabilities = new DesiredCapabilities();
-		devicesName=OverallSituation.getDeviceName(devicesName);
-		platformVersion=OverallSituation.platformVersion(platformVersion);
+		devicesName = OverallSituation.getDeviceName(devicesName);
+		platformVersion = OverallSituation.platformVersion(platformVersion);
 		capabilities.setCapability("noReset", true);
 		capabilities.setCapability("platformName", "Android");
 		capabilities.setCapability("deviceName", devicesName);
-		capabilities.setCapability("platformVersion",platformVersion);
+		capabilities.setCapability("platformVersion", platformVersion);
 		capabilities.setCapability("app", app.getAbsolutePath());
 		capabilities.setCapability("appActivity",
 				"com.to8to.steward.TLaunchActivity");
-    	//capabilities.setCapability("sessionOverride", true); // 每次启动时覆盖session，否则第二次后运行会报错不能新建session
-		androidDriver = new AndroidDriver(new URL("http://192.168.3.95:4723/wd/hub"),
-    			capabilities);
-    	return androidDriver;
+		// capabilities.setCapability("sessionOverride", true); //
+		// 每次启动时覆盖session，否则第二次后运行会报错不能新建session
+		androidDriver = new AndroidDriver(new URL(
+				"http://192.168.3.95:4723/wd/hub"), capabilities);
+		return androidDriver;
 	}
+
 	@Test
 	// 首次安装开启APP
 	public void BtnStay() {
@@ -69,7 +72,7 @@ public class TestClassAppNg  {
 			// TODO Auto-generated catch block
 			try {
 				Thread.sleep(5000);
-				//startggdate();
+				// startggdate();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				System.out.println("超时");
@@ -77,11 +80,11 @@ public class TestClassAppNg  {
 			}
 		}
 	}
+
 	// 非首次安装开启APP-启动页
 	@Test(dependsOnMethods = { "BtnStay" })
 	public void startggdate() {
 		try {
-			//androidDriver=overallSituation.setUp(driver);
 			Thread.sleep(1000);
 			// 我的个人中心
 			MobileElement tabBar;
@@ -97,9 +100,6 @@ public class TestClassAppNg  {
 			System.out.println("tabBar:" + tvLogin);
 			tvLogin.click();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			//clickSetting();
-			// System.out.println("tabBar:" + tvLogin);
 		}
 	}
 
@@ -107,7 +107,7 @@ public class TestClassAppNg  {
 	@Test(dependsOnMethods = { "startggdate" })
 	public void loginContact() {
 		try {
-			//androidDriver=overallSituation.setUp(driver);
+			// androidDriver=overallSituation.setUp(driver);
 			// 短信验证码登录
 			Thread.sleep(2000);
 			// 账号密码登录
@@ -142,7 +142,7 @@ public class TestClassAppNg  {
 				OverallSituation.snapshot(androidDriver, screenShot);
 			}
 		} catch (Exception e) {
-			//clickSetting();
+			// clickSetting();
 			System.out.println("error_自定义");
 		}
 	}
@@ -151,7 +151,7 @@ public class TestClassAppNg  {
 	// 个人中心登录态
 	public void clickSetting() {
 		try {
-			//androidDriver=overallSituation.setUp(driver);
+			// androidDriver=overallSituation.setUp(driver);
 			System.out.println("success!");
 			File screenShot = androidDriver.getScreenshotAs(OutputType.FILE);
 			OverallSituation.snapshot(androidDriver, screenShot);
@@ -160,18 +160,20 @@ public class TestClassAppNg  {
 			e.printStackTrace();
 		}
 	}
+
 	@Test(dependsOnMethods = { "clickSetting" })
-	public void indexBanner(){
+	public void indexBanner() {
 		try {
-			//androidDriver=overallSituation.setUp(driver);
+			// androidDriver=overallSituation.setUp(driver);
 			System.out.println("index_banner111");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	  @AfterTest
-	    public void tearDown() throws Exception {
-		  androidDriver.quit();
-	    }
+
+	@AfterTest
+	public void tearDown() throws Exception {
+		androidDriver.quit();
+	}
 }

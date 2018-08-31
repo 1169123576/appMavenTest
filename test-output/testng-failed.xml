@@ -6,9 +6,11 @@
       <class name="to8to_app.imgs.imgLibraies.TestClassAppNg">
         <methods>
           <include name="clickSetting"/>
+          <include name="BtnStay"/>
           <include name="startggdate"/>
           <include name="indexBanner"/>
           <include name="loginContact"/>
+          <include name="setUp"/>
         </methods>
       </class> <!-- to8to_app.imgs.imgLibraies.TestClassAppNg -->
     </classes>

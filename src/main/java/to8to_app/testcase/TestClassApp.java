@@ -12,15 +12,16 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import to8to_app.imgs.imgLibraies.TestClassAppNg;
 import to8to_app.to8to_app_Factory.OverallSituation;
 
-public class TestClassApp  {
+public class TestClassApp extends TestClassAppNg {
 	private AndroidDriver androidDriver=null;
 	private static String devicesName=null;
 	 private static String platformVersion=null;
 	OverallSituation overallSituation = new OverallSituation();
 	@BeforeTest
-	public AndroidDriver setUp() throws Exception{
+	/*public AndroidDriver setUp() throws Exception{
 		File classpathRoot = new File(System.getProperty("user.dir"));
 		File appDir = new File(classpathRoot, "apps");
 		File app = new File(appDir, "app-to8to-release-8-13-6.3.0.7.apk");
@@ -38,12 +39,13 @@ public class TestClassApp  {
 		androidDriver = new AndroidDriver(new URL("http://192.168.3.95:4723/wd/hub"),
     			capabilities);
     	return androidDriver;
-	}
+	}*/
 	@Test
 	// 首次安装开启APP
 	public void BtnStay() {
 		try {
 			Thread.sleep(3000);
+			androidDriver=TestClassAppNg.setUp();
 			// 新安装后进入首页--你的装修状态
 			MobileElement btnStay = (MobileElement) androidDriver
 					.findElementById("com.to8to.housekeeper:id/btn_stay");

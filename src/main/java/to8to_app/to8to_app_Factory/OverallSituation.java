@@ -1,21 +1,16 @@
 package to8to_app.to8to_app_Factory;
 
-import io.appium.java_client.android.AndroidDriver;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Test;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class OverallSituation {
 	 private static String devicesName=null; 
