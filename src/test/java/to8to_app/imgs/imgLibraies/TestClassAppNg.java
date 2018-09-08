@@ -1,7 +1,10 @@
 package to8to_app.imgs.imgLibraies;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.net.URL;
+import java.util.Properties;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -12,7 +15,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import to8to_app.to8to_app_Factory.OverallSituation;
+import to8to_app.globe.OverallSituation;
 
 public class TestClassAppNg {
 	private static AndroidDriver androidDriver = null;
@@ -22,26 +25,32 @@ public class TestClassAppNg {
 
 	@BeforeTest
 	public static AndroidDriver setUp() throws Exception {
+		devicesName = OverallSituation.getDeviceName(devicesName);
+		platformVersion = OverallSituation.platformVersion(platformVersion);
+		Properties properties = new Properties();
+		BufferedReader bufferedReader = new BufferedReader(
+				new FileReader("account-config.properties"));
+		properties.load(bufferedReader);
+		System.out.println(bufferedReader);
+		String appActivity=null,appiumServerUrl=null;
+		appActivity=properties.getProperty("TLaunchActivity");
+		appiumServerUrl=properties.getProperty("AppiumServerName");
 		File classpathRoot = new File(System.getProperty("user.dir"));
 		File appDir = new File(classpathRoot, "apps");
 		File app = new File(appDir, "app-to8to-release-8-13-6.3.0.7.apk");
 		DesiredCapabilities capabilities = new DesiredCapabilities();
-		devicesName = OverallSituation.getDeviceName(devicesName);
-		platformVersion = OverallSituation.platformVersion(platformVersion);
 		capabilities.setCapability("noReset", true);
 		capabilities.setCapability("platformName", "Android");
 		capabilities.setCapability("deviceName", devicesName);
 		capabilities.setCapability("platformVersion", platformVersion);
 		capabilities.setCapability("app", app.getAbsolutePath());
-		capabilities.setCapability("appActivity",
-				"com.to8to.steward.TLaunchActivity");
-		// capabilities.setCapability("sessionOverride", true); //
-		// 每次启动时覆盖session，否则第二次后运行会报错不能新建session
-		androidDriver = new AndroidDriver(new URL(
-				"http://192.168.3.95:4723/wd/hub"), capabilities);
+		capabilities.setCapability("appActivity",appActivity);
+		/*capabilities.setCapability("sessionOverride", true); 
+		 *	每次启动时覆盖session，否则第二次运行会报错不能新建session
+		 */
+		androidDriver = new AndroidDriver(new URL(appiumServerUrl), capabilities);
 		return androidDriver;
 	}
-
 	@Test
 	// 首次安装开启APP
 	public void BtnStay() {
@@ -106,7 +115,16 @@ public class TestClassAppNg {
 	// 账号密码登录
 	@Test(dependsOnMethods = { "startggdate" })
 	public void loginContact() {
+		
 		try {
+			Properties properties = new Properties();
+			BufferedReader bufferedReader = new BufferedReader(
+					new FileReader("account-config.properties"));
+			properties.load(bufferedReader);
+			System.out.println(bufferedReader);
+			String accountUserName=null,accountPassword=null;
+			accountUserName=properties.getProperty("USERNAME");
+			accountPassword=properties.getProperty("PASSWORD");
 			// androidDriver=overallSituation.setUp(driver);
 			// 短信验证码登录
 			Thread.sleep(2000);
@@ -114,18 +132,21 @@ public class TestClassAppNg {
 			MobileElement tvAccountLogin = (MobileElement) androidDriver
 					.findElementById("com.to8to.housekeeper:id/tv_account_login");
 			tvAccountLogin.click();
-
+			/*截图 screenShot*/
+			File screenShot = androidDriver
+					.getScreenshotAs(OutputType.FILE);
+			OverallSituation.snapshot(androidDriver, screenShot);
 			Thread.sleep(2000);
 			// 输入手机号
 			MobileElement loginAccount = (MobileElement) androidDriver
 					.findElementById("com.to8to.housekeeper:id/edit_login_account");
 			loginAccount.click();
-			loginAccount.sendKeys("18675503241");
+			loginAccount.sendKeys(accountUserName);
 			Thread.sleep(1000);
 			// 输入密码
 			MobileElement loginPassword = (MobileElement) androidDriver
 					.findElementById("com.to8to.housekeeper:id/edit_login_password");
-			loginPassword.sendKeys("to8to123");
+			loginPassword.sendKeys(accountPassword);
 			Thread.sleep(1000);
 			// 触发登录操作
 			try {
@@ -136,8 +157,8 @@ public class TestClassAppNg {
 				// clickSetting(androidDriver);
 			} catch (Exception e) {
 				System.out.println("登录失败");
-				// 截图
-				File screenShot = androidDriver
+				/*截图 screenShot*/
+				screenShot = androidDriver
 						.getScreenshotAs(OutputType.FILE);
 				OverallSituation.snapshot(androidDriver, screenShot);
 			}
@@ -153,6 +174,7 @@ public class TestClassAppNg {
 		try {
 			// androidDriver=overallSituation.setUp(driver);
 			System.out.println("success!");
+			/*截图 screenShot*/
 			File screenShot = androidDriver.getScreenshotAs(OutputType.FILE);
 			OverallSituation.snapshot(androidDriver, screenShot);
 		} catch (Exception e) {

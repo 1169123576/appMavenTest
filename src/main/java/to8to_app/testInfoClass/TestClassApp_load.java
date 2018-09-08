@@ -1,4 +1,4 @@
-package to8to_app.testcase;
+package to8to_app.testInfoClass;
 
 import java.io.File;
 
@@ -9,7 +9,7 @@ import org.openqa.selenium.OutputType;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
-import to8to_app.to8to_app_Factory.OverallSituation;
+import to8to_app.globe.OverallSituation;
 
 public class TestClassApp_load {
 
