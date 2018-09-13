@@ -16,6 +16,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
+import to8to_app.imgs.imgLibraies.TestClassAppNg;
+import bsh.This;
+
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
@@ -26,7 +29,8 @@ import com.jcraft.jsch.SftpException;
 
 public class OverallSituation {
 	private static String devicesName = null;
-
+	private static StringBuffer devicesname=new StringBuffer();
+	private static File imgDir = null;
 	// 截图处理公共方法
 	public static void snapshot(TakesScreenshot driver, File screenShot) {
 		// 获取当前工作文件夹+"devicesName:"+devicesName
@@ -35,12 +39,13 @@ public class OverallSituation {
 		String screenShotName = screenShot.getName();
 		System.out.println("screenShotName=" + screenShotName);
 		StringBuffer sBuffer = new StringBuffer();
-		StringBuffer devicesname = sBuffer.append(screenShotName).insert(0,
+		//StringBuffer
+		devicesname = sBuffer.append(screenShotName).insert(0,
 				devicesName);
 		String currentpath = System.getProperty("user.dir");
-		File imgDir = new File(currentpath, "Images");
+		//File 
+		imgDir = new File(currentpath, "Images");
 		File scrFile = driver.getScreenshotAs(OutputType.FILE);
-		//
 		try {
 			/*
 			 * 保存屏幕截图， devicesname:图片名称
@@ -58,12 +63,9 @@ public class OverallSituation {
 			 * 目前上传下载都在主线程里执行，容易造成线程阻塞，需要采用多线程方法处理，
 			 * 开启独立的线程进行文件、图片上传和下载操作
 			 */
-			Properties properties = new Properties();
+			/*Properties properties = new Properties();
 			try {
-				BufferedReader bufferedReader = new BufferedReader(
-						new FileReader("ftpUtils-config.properties"));
-				properties.load(bufferedReader);
-				System.out.println(bufferedReader);
+				properties.load(TestClassAppNg.class.getClassLoader().getClass().getResourceAsStream("/properties_file/ftpUtils-config.properties"));
 				String ftpHost = null, ftpUserName = null, ftpPassword = null, directory = null;
 				Integer port = 0;
 				ftpHost = properties.getProperty("HOSTNAME");
@@ -73,7 +75,7 @@ public class OverallSituation {
 				directory = properties.getProperty("DIRECTORY");
 				String saveFile = imgDir + "\\" + devicesname;
 				System.out.println("截图保存目录:" +saveFile);
-				/*开启ftp连接，上传保存到项目中的截图到ftp服务器 */
+				开启ftp连接，上传保存到项目中的截图到ftp服务器 
 				SftpFileControl sf = new SftpFileControl();
 				ChannelSftp sftp = null;
 				Session sshSession = null;
@@ -95,11 +97,11 @@ public class OverallSituation {
 				Vector<LsEntry> v = sf.listFiles(directory, sftp);
 				for (LsEntry e : v) {
 					if (!e.getFilename().startsWith(".")) {
-						/* saveFile = upLoadDirectory + e.getFilename();
+						 saveFile = upLoadDirectory + e.getFilename();
 						 String directory, String uploadFile, ChannelSftp sftp
 						 *
 						 *	文件上传
-						 */
+						 
 						sf.upload(directory, saveFile, sftp);
 					}
 				}
@@ -114,8 +116,15 @@ public class OverallSituation {
 				System.out.println("文件上传连接Ftp服务器-Exception");
 			} catch (SftpException e1) {
 				System.out.println("文件操作-Exception");
-			}
+			}*/
 		}
+	}
+	
+	//文件操作方法
+	public static String getFileControl(String saveFile){
+		System.out.println("文件路径："+imgDir + "\\" + devicesname);
+		return saveFile=imgDir + "\\" + devicesname;
+		
 	}
 	
 	// 获取当前時間

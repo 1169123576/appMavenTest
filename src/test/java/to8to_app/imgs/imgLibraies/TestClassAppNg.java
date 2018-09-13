@@ -3,6 +3,7 @@ package to8to_app.imgs.imgLibraies;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
 
@@ -28,10 +29,11 @@ public class TestClassAppNg {
 		devicesName = OverallSituation.getDeviceName(devicesName);
 		platformVersion = OverallSituation.platformVersion(platformVersion);
 		Properties properties = new Properties();
-		BufferedReader bufferedReader = new BufferedReader(
-				new FileReader("account-config.properties"));
-		properties.load(bufferedReader);
-		System.out.println(bufferedReader);
+		 properties.load(TestClassAppNg.class.getClassLoader().getClass().getResourceAsStream("/properties_file/account-config.properties"));
+		/*BufferedReader bufferedReader = new BufferedReader(
+				new FileReader("/properties_file/account-config.properties"));*/
+		/*properties.load(bufferedReader);
+		System.out.println(bufferedReader);*/
 		String appActivity=null,appiumServerUrl=null;
 		appActivity=properties.getProperty("TLaunchActivity");
 		appiumServerUrl=properties.getProperty("AppiumServerName");
@@ -47,8 +49,9 @@ public class TestClassAppNg {
 		capabilities.setCapability("appActivity",appActivity);
 		/*capabilities.setCapability("sessionOverride", true); 
 		 *	每次启动时覆盖session，否则第二次运行会报错不能新建session
+		 *appiumServerUrl
 		 */
-		androidDriver = new AndroidDriver(new URL(appiumServerUrl), capabilities);
+		androidDriver = new AndroidDriver(new URL("http://119.29.173.247:4723/wd/hub"), capabilities);
 		return androidDriver;
 	}
 	@Test
@@ -118,10 +121,11 @@ public class TestClassAppNg {
 		
 		try {
 			Properties properties = new Properties();
-			BufferedReader bufferedReader = new BufferedReader(
+			/*BufferedReader bufferedReader = new BufferedReader(
 					new FileReader("account-config.properties"));
 			properties.load(bufferedReader);
-			System.out.println(bufferedReader);
+			System.out.println(bufferedReader);*/
+			 properties.load(TestClassAppNg.class.getClassLoader().getClass().getResourceAsStream("/properties_file/account-config.properties"));
 			String accountUserName=null,accountPassword=null;
 			accountUserName=properties.getProperty("USERNAME");
 			accountPassword=properties.getProperty("PASSWORD");
